@@ -1,0 +1,101 @@
+<section class="bg-white">
+  <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+    <aside
+      class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6"
+    >
+      <img
+        alt=""
+        src="https://img.freepik.com/free-vector/user-verification-unauthorized-access-prevention-private-account-authentication-cyber-security-people-entering-login-password-safety-measures_335657-3530.jpg"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    </aside>
+
+    <main
+      class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+    >
+      <div class="max-w-xl lg:max-w-3xl">
+        <a href="/" class="flex items-center space-x-3 cursor-pointer">
+          <img
+            src="logo.png"
+            alt="Logo"
+            class="w-10 h-10 object-cover rounded-full"
+          />
+          <h2 class="text-[#161e3c] text-2xl font-bold">Techspire</h2>
+        </a>
+
+        <h1
+          class="mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl"
+        >
+          Welcome Back 🦑
+        </h1>
+
+        <p class="mt-4 leading-relaxed text-gray-500">
+          Log in to your account to continue.
+        </p>
+
+        <!-- Login Form -->
+        <form class="mt-8 grid grid-cols-6 gap-6">
+          <div class="col-span-6">
+            <label for="Email" class="block text-sm font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              type="email"
+              id="Email"
+              name="email"
+              placeholder="Email"
+              class="mt-1 w-full py-2 pl-2 border border-[#161e3c] rounded-md bg-white text-sm text-gray-700 shadow-sm"
+              required
+            />
+          </div>
+
+          <div class="col-span-6">
+            <label
+              for="Password"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="Password"
+              name="password"
+              placeholder="****"
+              class="mt-1 w-full py-2 pl-2 border border-[#161e3c] rounded-md bg-white text-sm text-gray-700 shadow-sm"
+              required
+            />
+          </div>
+
+          <div class="col-span-6 flex items-center justify-between">
+            <label for="RememberMe" class="flex gap-2 items-center">
+              <input
+                type="checkbox"
+                id="RememberMe"
+                name="remember_me"
+                class="size-5 rounded-md border-[#161e3c] bg-white shadow-sm"
+              />
+              <span class="text-sm text-gray-700">Remember me</span>
+            </label>
+            <a href="#" class="text-sm text-gray-700 underline">
+              Forgot your password?
+            </a>
+          </div>
+
+          <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+            <button
+              type="submit"
+              class="inline-block shrink-0 rounded-md border border-[#161e3c] bg-[#161e3c] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#161e3c] focus:outline-none focus:ring active:text-blue-500"
+            >
+              Log in
+            </button>
+
+            <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+              Don't have an account?
+              <a href="/sign-up" class="text-gray-700 underline">Sign up</a>
+            </p>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+</section>
