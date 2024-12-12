@@ -1,62 +1,134 @@
 <div class="bg-indigo-600 px-4 py-3 text-white">
-    <p class="text-center text-sm font-medium">
-      Love techspire services?
-      <a href="#" class="inline-block underline">Check out our services</a>
-    </p>
-  </div>
-  <header class="bg-white p-4 shadow-lg sticky top-0 z-50">
-    <div class="container mx-auto flex items-center justify-between">
-      <!-- Logo / Title with Image -->
-      <a href="/" class="flex items-center space-x-3 cursor-pointer">
-        <img
-          src="logo.png"
-          alt="Logo"
-          class="w-10 h-10 object-cover rounded-full"
-        />
-        <h2 class="text-[#161e3c] text-2xl font-bold">Techspire</h2>
-      </a>
-  
-      <!-- Navigation Links -->
-      <nav> 
-        <ul class="flex space-x-6 text-lg font-medium">
-          <li>
-            <a
-              href="/"
-              class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a
-              href="/about"
-              class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
-              >About</a
-            >
-          </li>
-          <li>
-            <a
-              href="/services"
-              class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
-              >Services</a
-            >
-          </li>
-          <li>
-            <a
-              href="/contact"
-              class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
-              >Contact</a
-            >
-          </li>
-        </ul>
-      </nav>
-  
-      <!-- Login Button -->
-      <a
-        href="/login"
-        class="bg-[#161e3c] text-white py-2 px-4 rounded-lg hover:bg-[#005bb5] hover:scale-105 transform transition duration-300 ease-in-out shadow-md hover:shadow-xl"
-      >
-        Login
-      </a>
+  <p class="text-center text-sm font-medium">
+    Love techspire services?
+    <a href="#" class="inline-block underline">Check out our services</a>
+  </p>
+</div>
+<header class="bg-white p-4 shadow-lg sticky top-0 z-50">
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Logo / Title with Image -->
+    <a href="/" class="flex items-center space-x-3 cursor-pointer">
+      <img
+        src="logo.png"
+        alt="Logo"
+        class="w-10 h-10 object-cover rounded-full"
+      />
+      <h2 class="text-[#161e3c] text-2xl font-bold">Techspire</h2>
+    </a>
+
+    <!-- Navigation Links -->
+    <nav>
+      <ul class="flex space-x-6 text-lg font-medium">
+        <li>
+          <a
+            href="/"
+            class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            href="/about"
+            class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
+            >About</a
+          >
+        </li>
+        <li>
+          <a
+            href="/services"
+            class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
+            >Services</a
+          >
+        </li>
+        <li>
+          <a
+            href="/contact"
+            class="text-[#161e3c] hover:text-[#0066cc] hover:underline hover:scale-105 transform transition duration-300 ease-in-out"
+            >Contact</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Conditional Button -->
+    <div>
+      <ng-container *ngIf="isAuthenticated; else loginTemplate">
+        <div class="hidden md:relative md:block">
+          <button
+            type="button"
+            class="overflow-hidden rounded-full border border-gray-300 shadow-inner"
+            (click)="toggleDropdown()"
+          >
+            <span class="sr-only">Toggle dashboard menu</span>
+            <img
+              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt=""
+              class="size-10 object-cover"
+            />
+          </button>
+
+          <div
+            *ngIf="showDropdown"
+            class="absolute end-0 z-10 mt-0.5 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+            role="menu"
+          >
+            <div class="p-2">
+              <a
+                href="#"
+                class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                role="menuitem"
+              >
+                My profile
+              </a>
+              <a
+                href="#"
+                class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                role="menuitem"
+              >
+                Billing summary
+              </a>
+              <a
+                href="#"
+                class="block rounded-lg px-4 py-2 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+                role="menuitem"
+              >
+                Team settings
+              </a>
+            </div>
+            <div class="p-2">
+              <button
+                (click)="logout()"
+                class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-700 hover:bg-red-50"
+                role="menuitem"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                  />
+                </svg>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loginTemplate>
+        <a
+          href="/login"
+          class="bg-[#161e3c] text-white py-2 px-4 rounded-lg hover:bg-[#005bb5] hover:scale-105 transform transition duration-300 ease-in-out shadow-md hover:shadow-xl"
+        >
+          Login
+        </a>
+      </ng-template>
     </div>
-  </header>
-  
+  </div>
+</header>

@@ -33,6 +33,19 @@
           Log in to your account to continue.
         </p>
 
+        <!-- Success Message -->
+        <div
+          *ngIf="loginSignal() === false && errorSignal() === false"
+          class="text-green-600 mt-4"
+        >
+          Login successful!
+        </div>
+
+        <!-- Error Message -->
+        <div *ngIf="errorSignal()" class="text-red-600 mt-4">
+          Invalid credentials. Please try again.
+        </div>
+
         <!-- Login Form -->
         <form
           (ngSubmit)="submitLoginForm($event)"
