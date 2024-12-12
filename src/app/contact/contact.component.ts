@@ -1,14 +1,19 @@
-import { Component, Signal, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { CommonModule } from '@angular/common'; // Import CommonModule
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css'],
   standalone: true,
-  imports: [CommonModule],
+  imports: [ReactiveFormsModule, CommonModule], // Add CommonModule here
 })
 export default class ContactComponent {
   contactForm = new FormGroup({
@@ -18,50 +23,44 @@ export default class ContactComponent {
     message: new FormControl('', Validators.required),
   });
 
-  firstName = signal('hello');
-  lastName = signal('dark');
-  email = signal('dakr@gmail.com');
-  message = signal('good work');
-  responseMessage = signal<string | null>(null);
+  submitSignal = signal<boolean | null>(null); // null means no action yet
+  errorSignal = signal<boolean | null>(null);
 
   constructor(private http: HttpClient) {}
 
-  handleInput(event: Event, signal: Signal<string>) {
-    alert('Form submitted!');
-    console.log("event is here",event.target)
-    const target = event.target as HTMLInputElement | HTMLTextAreaElement;
-    console.log("event is here",event)
-    // if (target) {
-    //   signal(target.value); // Pass the input value to the signal
-    // }
-  }
-
   submitContactForm(event: Event) {
-    console.log('event =======', event);
     if (event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault();
+    }
+
+    if (this.contactForm.invalid) {
+      console.error('Form is invalid');
+      return;
     }
 
     const contactData = {
-      firstName: this.firstName(),
-      lastName: this.lastName(),
-      email: this.email(),
-      message: this.message(),
+      firstName: this.contactForm.value.firstName || '',
+      lastName: this.contactForm.value.lastName || '',
+      email: this.contactForm.value.email || '',
+      message: this.contactForm.value.message || '',
     };
+
+    this.submitSignal.set(true); // Indicate form is being submitted
+    this.errorSignal.set(null); // Reset error state
 
     this.http
       .post('http://localhost:3000/api/contact-us', contactData)
       .subscribe({
         next: (response: any) => {
-          console.log(response.message);
-          this.responseMessage.update(() => response.message); // Update with response
+          console.log('API response:', response);
+          this.contactForm.reset();
+          this.submitSignal.set(false); // Success state
+          this.errorSignal.set(false); // No error
         },
         error: (error) => {
-          console.error('Error submitting the contact form:', error);
-          this.responseMessage.update(
-            () =>
-              'There was an error submitting your message. Please try again.'
-          ); // Update with error message
+          console.error('Error submitting form:', error);
+          this.submitSignal.set(false); // Not in progress
+          this.errorSignal.set(true); // Error occurred
         },
       });
   }

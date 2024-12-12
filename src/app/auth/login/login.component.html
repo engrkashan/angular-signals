@@ -34,7 +34,11 @@
         </p>
 
         <!-- Login Form -->
-        <form class="mt-8 grid grid-cols-6 gap-6">
+        <form
+          (ngSubmit)="submitLoginForm($event)"
+          [formGroup]="loginForm"
+          class="mt-8 grid grid-cols-6 gap-6"
+        >
           <div class="col-span-6">
             <label for="Email" class="block text-sm font-medium text-gray-700">
               Email
@@ -44,6 +48,7 @@
               id="Email"
               name="email"
               placeholder="Email"
+              formControlName="email"
               class="mt-1 w-full py-2 pl-2 border border-[#161e3c] rounded-md bg-white text-sm text-gray-700 shadow-sm"
               required
             />
@@ -59,6 +64,7 @@
             <input
               type="password"
               id="Password"
+              formControlName="password"
               name="password"
               placeholder="****"
               class="mt-1 w-full py-2 pl-2 border border-[#161e3c] rounded-md bg-white text-sm text-gray-700 shadow-sm"

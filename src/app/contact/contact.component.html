@@ -34,8 +34,28 @@
           just want to say hi, feel free to drop us a message.
         </p>
 
+        <div class="col-span-1 sm:col-span-3">
+          <div
+            *ngIf="submitSignal() === false && errorSignal() === false"
+            class="mt-4 text-green-600"
+          >
+            <p>
+              Your message has been sent successfully! We'll get back to you
+              soon.
+            </p>
+          </div>
+
+          <div *ngIf="errorSignal()" class="mt-4 text-red-600">
+            <p>
+              There was an error submitting your message. Please try again
+              later.
+            </p>
+          </div>
+        </div>
+
         <form
           (ngSubmit)="submitContactForm($event)"
+          [formGroup]="contactForm"
           class="mt-8 grid grid-cols-6 gap-6"
         >
           <div class="col-span-6 sm:col-span-3">
@@ -49,9 +69,7 @@
             <input
               type="text"
               id="FirstName"
-              name="first_name"
-              [value]="firstName()"
-              (input)="handleInput($event, firstName)"
+              formControlName="firstName"
               placeholder="Your first name"
               class="mt-1 w-full py-2 pl-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -68,9 +86,7 @@
             <input
               type="text"
               id="LastName"
-              name="last_name"
-              [value]="lastName()"
-              (input)="handleInput($event, lastName)"
+              formControlName="lastName"
               placeholder="Your last name"
               class="mt-1 w-full py-2 pl-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -84,9 +100,7 @@
             <input
               type="email"
               id="Email"
-              name="email"
-              [value]="email()"
-              (input)="handleInput($event, email)"
+              formControlName="email"
               placeholder="Your email"
               class="mt-1 w-full py-2 pl-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
@@ -102,17 +116,16 @@
 
             <textarea
               id="Message"
-              name="message"
+              formControlName="message"
               placeholder="Write your message here..."
               rows="4"
-              [value]="message()"
-              (input)="handleInput($event, message)"
               class="mt-1 w-full py-2 pl-2 border border-gray-300 rounded-md bg-white text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             ></textarea>
           </div>
 
           <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
             <button
+              type="submit"
               class="inline-block shrink-0 rounded-md border border-[#161e3c] bg-[#161e3c] px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-[#161e3c] focus:outline-none focus:ring active:text-blue-500"
             >
               Send Message
@@ -128,9 +141,6 @@
             </p>
           </div>
         </form>
-        <p *ngIf="responseMessage()" class="mt-4 text-sm text-gray-700">
-          {{ responseMessage() }}
-        </p>
       </div>
     </main>
   </div>
